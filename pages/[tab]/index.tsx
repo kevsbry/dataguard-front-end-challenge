@@ -1,8 +1,10 @@
 import type { NextPage } from "next";
+import { useAppSelector } from "../../app/hooks";
 import { wrapper } from "../../app/store";
 import PageLayout from "../../components/PageLayout";
 import PluginCard from "../../components/PluginCard";
 import { setCurrentTab } from "../../features/current-tab-slice";
+import { fetchDataguardData } from "../../features/dataguard-slice";
 import { TabVariants } from "../../typings/tab-variants";
 
 export const getServerSideProps = wrapper.getServerSideProps(
@@ -18,8 +20,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
           },
         };
       }
-
       store.dispatch(setCurrentTab({ name: param.tab }));
+      await store.dispatch(fetchDataguardData());
 
       return {
         props: {},
@@ -28,6 +30,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const Home: NextPage = () => {
+  const plugins = useAppSelector((state) => state.dataguard.data?.plugins);
+
   return (
     <PageLayout
       header={{
@@ -38,10 +42,16 @@ const Home: NextPage = () => {
         },
       }}
     >
-      <PluginCard
-        pluginName="Plugin 1"
-        pluginDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud"
-      />
+      {plugins &&
+        Object.keys(plugins).map((pKey) => {
+          return (
+            <PluginCard
+              key={pKey}
+              pluginName={plugins[pKey].title}
+              pluginDescription={plugins[pKey].description}
+            />
+          );
+        })}
     </PageLayout>
   );
 };
