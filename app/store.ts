@@ -1,9 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 
+import currentTabReducer from "../features/current-tab-slice";
+
 const makeStore = () =>
   configureStore({
-    reducer: {},
+    reducer: {
+      currentTab: currentTabReducer,
+    },
   });
 
 export type AppStore = ReturnType<typeof makeStore>;
