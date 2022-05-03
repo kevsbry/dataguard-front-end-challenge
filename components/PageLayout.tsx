@@ -37,10 +37,7 @@ const PageLayout = ({
         <div className="col-span-1">
           <TabNavigation />
         </div>
-        <div className="col-span-4">
-          {/* {Content} */}
-          <h1>4</h1>
-        </div>
+        <div className="col-span-4 p-8">{Content}</div>
       </div>
 
       {Footer}

@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { wrapper } from "../../app/store";
 import PageLayout from "../../components/PageLayout";
+import PluginCard from "../../components/PluginCard";
 import { setCurrentTab } from "../../features/current-tab-slice";
 import { TabVariants } from "../../typings/tab-variants";
 
@@ -30,14 +31,17 @@ const Home: NextPage = () => {
   return (
     <PageLayout
       header={{
-        title: "Home",
+        title: "Plugins",
         meta: {
           name: "Home",
           content: "dataguard coding challenge",
         },
       }}
     >
-      <h1>sdf</h1>
+      <PluginCard
+        pluginName="Plugin 1"
+        pluginDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud"
+      />
     </PageLayout>
   );
 };
