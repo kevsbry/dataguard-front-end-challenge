@@ -1,4 +1,4 @@
-# Random User Generator (S30 Frontend Code Challenge)
+# DataGuard Frontend Code Challenge
 
 API route can be accessed on https://dataguard-coding-challenge.netlify.app/api/data or http://localhost:3000/api/data (if you run the project locally)
 
