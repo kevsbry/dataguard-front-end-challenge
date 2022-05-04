@@ -46,10 +46,7 @@ export const fetchDataguardData = createAsyncThunk(
   "fetch-dataguard-data",
   async (_, { dispatch }) => {
     try {
-      const res = await fetch(
-        "http://localhost:3001/api/data"
-        // "https://dataguard.blob.core.windows.net/challenges/plugins/fe-challenge.json"
-      );
+      const res = await fetch(process.env.NEXT_PUBLIC_REST_API!);
       const data: { data: IData } = await res.json();
 
       dispatch(dataFulfilled(data.data));
