@@ -23,7 +23,7 @@ Technologies I used for this project.
 
 - clone the project
 - yarn install / npm intall
-- yarn start / npm run start
+- yarn dev / npm run dev
 
 [nextjs]: https://nextjs.org/
 [reactjs]: https://reactjs.org/
