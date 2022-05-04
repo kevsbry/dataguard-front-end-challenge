@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 
-const PluginSwitch = ({
+const ToggleSwitch = ({
   active,
   onToggle,
+  disabled = false,
 }: {
   active: boolean;
   onToggle: () => void;
+  disabled?: boolean;
 }) => {
   const [enabled, setEnabled] = useState(active);
 
@@ -13,6 +15,10 @@ const PluginSwitch = ({
     <div
       className="flex flex-col cursor-pointer transition-all items-center"
       onClick={() => {
+        if (disabled) {
+          return;
+        }
+
         onToggle();
         setEnabled(!enabled);
       }}
@@ -40,4 +46,4 @@ const PluginSwitch = ({
   );
 };
 
-export default PluginSwitch;
+export default ToggleSwitch;

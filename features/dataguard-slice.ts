@@ -14,18 +14,20 @@ interface ITab {
   inactive: string[];
 }
 
-interface IPlugins {
+export interface IPlugins {
   [key: string]: {
     title: string;
     description: string;
   };
 }
 
+export interface ITabData {
+  [key: string]: ITab;
+}
+
 interface IData {
   tabs: string[];
-  tabdata: {
-    [key: string]: ITab;
-  };
+  tabdata: ITabData;
   plugins: IPlugins;
 }
 

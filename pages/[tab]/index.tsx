@@ -4,7 +4,11 @@ import { wrapper } from "../../app/store";
 import PageLayout from "../../components/PageLayout";
 import PluginCard from "../../components/PluginCard";
 import { setCurrentTab } from "../../features/current-tab-slice";
-import { fetchDataguardData } from "../../features/dataguard-slice";
+import {
+  fetchDataguardData,
+  IPlugins,
+  ITabData,
+} from "../../features/dataguard-slice";
 import { TabVariants } from "../../typings/tab-variants";
 
 export const getServerSideProps = wrapper.getServerSideProps(
@@ -30,7 +34,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const Home: NextPage = () => {
-  const plugins = useAppSelector((state) => state.dataguard.data?.plugins);
+  const currentTab = useAppSelector((state) => state.currentTab.name);
+  const data = useAppSelector((state) => state.dataguard.data);
+  const plugins = data?.plugins;
+  const tabData = data?.tabdata;
 
   return (
     <PageLayout
@@ -42,17 +49,37 @@ const Home: NextPage = () => {
         },
       }}
     >
-      {plugins &&
-        Object.keys(plugins).map((pKey) => {
-          return (
-            <PluginCard
-              key={pKey}
-              pluginName={plugins[pKey].title}
-              pluginDescription={plugins[pKey].description}
-            />
-          );
-        })}
+      <div className="flex flex-wrap justify-evenly">
+        {mapPlugins(currentTab, "active", plugins, tabData)}
+        {mapPlugins(currentTab, "disabled", plugins, tabData)}
+        {mapPlugins(currentTab, "inactive", plugins, tabData)}
+      </div>
     </PageLayout>
+  );
+};
+
+// Helpers
+
+const mapPlugins = (
+  currentTab: string,
+  pluginStatus: "active" | "disabled" | "inactive",
+  plugins?: IPlugins,
+  tabData?: ITabData
+) => {
+  return (
+    plugins &&
+    tabData &&
+    tabData[currentTab][pluginStatus].map((plugin) => {
+      return (
+        <PluginCard
+          key={plugin}
+          pluginName={plugins[plugin].title}
+          pluginDescription={plugins[plugin].description}
+          active={pluginStatus === "active"}
+          disabled={pluginStatus === "disabled"}
+        />
+      );
+    })
   );
 };
 
