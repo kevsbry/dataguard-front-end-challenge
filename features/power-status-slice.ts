@@ -1,13 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = true;
+const initialState = {
+  enabled: true,
+};
 
 const tabPluginsSlice = createSlice({
   name: "tab-plugins-slice",
   initialState,
   reducers: {
     togglePowerStatus: (state) => {
-      state = !state;
+      state.enabled = !state.enabled;
     },
   },
 });
