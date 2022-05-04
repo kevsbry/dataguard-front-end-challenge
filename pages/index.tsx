@@ -1,3 +1,5 @@
+import type { NextPage } from "next";
+
 export const getServerSideProps = () => {
   return {
     redirect: {
@@ -6,3 +8,9 @@ export const getServerSideProps = () => {
     },
   };
 };
+
+const Home: NextPage = () => {
+  return <div></div>;
+};
+
+export default Home;
