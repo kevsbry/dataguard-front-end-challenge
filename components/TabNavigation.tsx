@@ -9,6 +9,8 @@ import { togglePowerStatus } from "../features/power-status-slice";
 
 const TabNavigation = () => {
   const currentTab = useAppSelector((state) => state.currentTab);
+
+  const data = useAppSelector((state) => state.dataguard.data);
   const powerStatus = useAppSelector((state) => state.powerStatus);
   const dispatch = useDispatch();
 
@@ -16,9 +18,9 @@ const TabNavigation = () => {
     <div className="prose h-screen bg-gray-100 flex flex-col relative">
       <Logo />
 
-      <Tab tabVariant="tab1" active={currentTab.name === "tab1"} />
-      <Tab tabVariant="tab2" active={currentTab.name === "tab2"} />
-      <Tab tabVariant="tab3" active={currentTab.name === "tab3"} />
+      {data?.tabs.map((tab) => (
+        <Tab key={tab} tabVariant={tab} active={currentTab.name === tab} />
+      ))}
 
       <div className="w-full absolute left-0 bottom-0 flex p-4 pb-8 justify-evenly">
         <h5 className="font-light">

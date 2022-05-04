@@ -35,9 +35,20 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
 const Home: NextPage = () => {
   const currentTab = useAppSelector((state) => state.currentTab.name);
+  const { error } = useAppSelector((state) => state.dataguard);
   const data = useAppSelector((state) => state.dataguard.data);
   const plugins = data?.plugins;
   const tabData = data?.tabdata;
+
+  if (error) {
+    return (
+      <div className="w-screen h-screen flex flex-col justify-center items-center">
+        <span className="m-auto font-semibold text-xl">
+          {"Oops something went wrong! :("}
+        </span>
+      </div>
+    );
+  }
 
   return (
     <PageLayout

@@ -5,6 +5,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+import { TabVariants } from "../typings/tab-variants";
 
 interface ITab {
   title: string;
@@ -26,7 +27,7 @@ export interface ITabData {
 }
 
 interface IData {
-  tabs: string[];
+  tabs: TabVariants[];
   tabdata: ITabData;
   plugins: IPlugins;
 }
